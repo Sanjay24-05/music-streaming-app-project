@@ -1,0 +1,66 @@
+.playlist-manager-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin: 0;
+  color: #333;
+}
+
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.playlist-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.playlist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.playlist-cover {
+  height: 300px;
+  object-fit: cover;
+}
+
+.description {
+  color: #666;
+  margin: 12px 0;
+  min-height: 40px;
+}
+
+.playlist-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.privacy-public {
+  background-color: #4caf50;
+  color: white;
+}
+
+.privacy-private {
+  background-color: #f44336;
+  color: white;
+}
+
+.privacy-unlisted {
+  background-color: #ff9800;
+  color: white;
+}

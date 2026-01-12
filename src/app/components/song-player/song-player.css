@@ -1,0 +1,96 @@
+.player-container {
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.player-card {
+  padding: 32px;
+}
+
+.player-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.album-cover img {
+  width: 300px;
+  height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.song-info {
+  text-align: center;
+}
+
+.song-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+}
+
+.song-info p {
+  margin: 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.progress-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.progress-slider {
+  flex: 1;
+}
+
+.time {
+  color: #666;
+  font-size: 0.9rem;
+  min-width: 45px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.play-button {
+  width: 64px;
+  height: 64px;
+}
+
+.play-button mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.controls button mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.volume-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.volume-slider {
+  flex: 1;
+}
+
+.volume-value {
+  color: #666;
+  font-size: 0.9rem;
+  min-width: 40px;
+}

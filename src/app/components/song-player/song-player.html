@@ -1,1 +1,64 @@
-<p>song-player works!</p>
+<div class="player-container">
+  <mat-card class="player-card">
+    <div class="player-content">
+      <!-- Album Cover -->
+      <div class="album-cover">
+        <img [src]="currentSong.coverImage" [alt]="currentSong.title">
+      </div>
+
+      <!-- Song Info -->
+      <div class="song-info">
+        <h2>{{ currentSong.title }}</h2>
+        <p>{{ currentSong.artist }}</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-section">
+        <span class="time">{{ formatTime(currentTime) }}</span>
+        <mat-slider 
+          class="progress-slider"
+          [min]="0"
+          [max]="duration"
+          [discrete]="true"
+        >
+          <input matSliderThumb [(ngModel)]="currentTime">
+        </mat-slider>
+        <span class="time">{{ formatTime(duration) }}</span>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="controls">
+        <button mat-icon-button (click)="skipPrevious()">
+          <mat-icon>skip_previous</mat-icon>
+        </button>
+        
+        <button 
+          mat-fab 
+          color="primary" 
+          (click)="togglePlayPause()"
+          class="play-button"
+        >
+          <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+        </button>
+        
+        <button mat-icon-button (click)="skipNext()">
+          <mat-icon>skip_next</mat-icon>
+        </button>
+      </div>
+
+      <!-- Volume Control -->
+      <div class="volume-section">
+        <mat-icon>volume_up</mat-icon>
+        <mat-slider 
+          class="volume-slider"
+          [min]="0"
+          [max]="100"
+          [discrete]="true"
+        >
+          <input matSliderThumb [(ngModel)]="volume">
+        </mat-slider>
+        <span class="volume-value">{{ volume }}%</span>
+      </div>
+    </div>
+  </mat-card>
+</div>

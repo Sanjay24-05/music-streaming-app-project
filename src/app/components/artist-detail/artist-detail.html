@@ -1,1 +1,53 @@
-<p>artist-detail works!</p>
+
+<div class="artist-detail-container" *ngIf="artist">
+  <!-- Artist Header -->
+  <div class="artist-header">
+    <img [src]="artist.imageUrl" [alt]="artist.name" class="artist-image">
+    <div class="artist-info">
+      <h1>{{ artist.name }}</h1>
+      <p class="listeners">
+        <mat-icon>people</mat-icon>
+        {{ artist.getFormattedListeners() }} monthly listeners
+      </p>
+      <mat-chip-set>
+        <mat-chip *ngFor="let genre of artist.genres">{{ genre }}</mat-chip>
+      </mat-chip-set>
+      <button mat-raised-button color="primary" (click)="followArtist()">
+        <mat-icon>person_add</mat-icon>
+        Follow
+      </button>
+    </div>
+  </div>
+
+  <!-- Biography -->
+  <mat-card class="biography-card">
+    <mat-card-header>
+      <mat-card-title>Biography</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ artist.biography }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Top Tracks -->
+  <div class="top-tracks-section">
+    <h2>Top Tracks</h2>
+    <div class="tracks-list">
+      <mat-card *ngFor="let track of topTracks; let i = index" class="track-card">
+        <div class="track-content">
+          <span class="track-number">{{ i + 1 }}</span>
+          <img [src]="track.coverImageUrl" [alt]="track.title" class="track-cover">
+          <div class="track-info">
+            <h3>{{ track.title }}</h3>
+            <p>{{ track.getFormattedDuration() }} • {{ track.genre }}</p>
+          </div>
+        </div>
+        <div class="track-actions">
+          <button mat-icon-button (click)="playSong(track)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

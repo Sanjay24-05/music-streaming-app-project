@@ -1,1 +1,61 @@
-<p>playlist-manager works!</p>
+
+<div class="playlist-manager-container">
+  <div class="header">
+    <h2 class="page-title">My Playlists</h2>
+    <button mat-raised-button color="primary" (click)="createPlaylist()">
+      <mat-icon>add</mat-icon>
+      Create Playlist
+    </button>
+  </div>
+
+  <div class="playlists-grid">
+    <mat-card *ngFor="let playlist of playlists" class="playlist-card">
+      <img 
+        mat-card-image 
+        [src]="playlist.coverImageUrl" 
+        [alt]="playlist.name"
+        class="playlist-cover"
+      />
+      
+      <mat-card-header>
+        <mat-card-title>{{ playlist.name }}</mat-card-title>
+        <mat-card-subtitle>{{ playlist.getSongCount() }} songs</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="description">{{ playlist.description }}</p>
+        <mat-chip-set>
+          <mat-chip [ngClass]="getPrivacyClass(playlist.privacy)">
+            {{ playlist.privacy }}
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+      
+      <mat-card-actions class="playlist-actions">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="playPlaylist(playlist)"
+        >
+          <mat-icon>play_arrow</mat-icon>
+          Play
+        </button>
+        
+        <button 
+          mat-icon-button 
+          (click)="editPlaylist(playlist)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        
+        <button 
+          mat-icon-button 
+          color="warn"
+          (click)="deletePlaylist(playlist)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

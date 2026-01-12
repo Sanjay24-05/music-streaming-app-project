@@ -1,1 +1,28 @@
-<p>navbar works!</p>
+
+<mat-toolbar color="primary" class="navbar">
+  <span class="app-title">
+    <mat-icon>music_note</mat-icon>
+    {{ appTitle }}
+  </span>
+  
+  <span class="spacer"></span>
+  
+  <nav class="nav-links">
+    <a mat-button routerLink="/songs" routerLinkActive="active-link">
+      <mat-icon>library_music</mat-icon>
+      Songs
+    </a>
+    <a mat-button routerLink="/artists" routerLinkActive="active-link">
+      <mat-icon>people</mat-icon>
+      Artists
+    </a>
+    <a mat-button routerLink="/playlists" routerLinkActive="active-link">
+      <mat-icon>playlist_play</mat-icon>
+      Playlists
+    </a>
+    <a mat-button routerLink="/now-playing" routerLinkActive="active-link">
+      <mat-icon>play_circle</mat-icon>
+      Now Playing
+    </a>
+  </nav>
+</mat-toolbar>
