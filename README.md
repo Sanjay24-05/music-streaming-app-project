@@ -268,22 +268,28 @@ All interactive elements provide feedback:
 
 ## 📸 Screenshots <a id="screenshots"></a>
 
-> **Note**: Add screenshots here showing:
+
 > - Song list page
 <img width="1898" height="862" alt="image" src="https://github.com/user-attachments/assets/cf07438c-cf79-41eb-87ef-e07a58c3b09d" />
+
 
 > - Artist detail page
 <img width="1898" height="863" alt="image" src="https://github.com/user-attachments/assets/70e9f19d-4aa0-4b5e-8ca0-3c26c2a3e016" />
 
+
 > - Playlist manager
 <img width="1899" height="864" alt="image" src="https://github.com/user-attachments/assets/b8ab4851-8523-49a4-925a-fc4c9c7ac8c3" />
+
 
 > - Now playing interface
 <img width="1896" height="859" alt="image" src="https://github.com/user-attachments/assets/dce653d1-82f6-4adb-8cb8-57d5c93f8832" />
 
+
 > - Alert dialogs
 <img width="1903" height="897" alt="image" src="https://github.com/user-attachments/assets/f8eeb692-1d06-4db3-8c1d-ff9052ce7e77" />
+
 <img width="1919" height="917" alt="image" src="https://github.com/user-attachments/assets/46752cb0-2cc3-47c2-acc2-b168055c646b" />
+
 
 
 ---
