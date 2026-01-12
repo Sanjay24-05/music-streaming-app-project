@@ -20,12 +20,17 @@ A modern, feature-rich music streaming application built with Angular and TypeSc
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Roadmap](#roadmap)
-- [Team Members](#team-members)
-- [Acknowledgments](#acknowledgments)
+- [Key Concepts Demonstrated](#key-concepts-demonstrated)
+- [Development Notes](#development-notes)
+- [Documentation](#documentation)
+- [License](#license)
+- [Academic Integrity](#academic-integrity)
+- [Project Statistics](#project-statistics)
+- [Highlights](#highlights)
 
 ---
 
-## 🎯 Project Overview
+## 🎯 Project Overview <a id="project-overview"></a>
 
 This project is a Single Page Application (SPA) that allows users to:
 - Browse and discover music tracks
@@ -40,7 +45,7 @@ This project is a Single Page Application (SPA) that allows users to:
 
 ---
 
-## 🚀 Current Status (CIA-2)
+## 🚀 Current Status (CIA-2) <a id="current-status-cia-2"></a>
 
 ### ✅ Completed Tasks
 
@@ -87,7 +92,7 @@ Example interactions:
 
 ---
 
-## 🛠️ Features Implemented
+## 🛠️ Features Implemented <a id="features-implemented"></a>
 
 ### Data Models (TypeScript)
 ```typescript
@@ -120,7 +125,7 @@ app/
 
 ---
 
-## 💻 Tech Stack
+## 💻 Tech Stack <a id="tech-stack"></a>
 
 ### Frontend Framework
 - **Angular**: 20.3.10
@@ -141,7 +146,8 @@ app/
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure <a id="project-structure"></a>
+
 
 ```
 music-streaming-app/
@@ -181,7 +187,7 @@ music-streaming-app/
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Installation & Setup <a id="installation--setup"></a>
 
 ### Prerequisites
 ```bash
@@ -220,7 +226,7 @@ ng build --configuration production
 
 ---
 
-## 🎮 Usage
+## 🎮 Usage <a id="usage"></a>
 
 ### Navigating the Application
 
@@ -260,7 +266,7 @@ All interactive elements provide feedback:
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshots <a id="screenshots"></a>
 
 > **Note**: Add screenshots here showing:
 > - Song list page
@@ -282,7 +288,7 @@ All interactive elements provide feedback:
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Roadmap <a id="roadmap"></a>
 
 ### CIA-2: Foundation ✅ (Current Phase)
 - [x] TypeScript data models and interfaces
@@ -343,7 +349,7 @@ All interactive elements provide feedback:
 ---
 
 
-## 📚 Key Concepts Demonstrated
+## 📚 Key Concepts Demonstrated <a id="key-concepts-demonstrated"></a>
 
 ### TypeScript Features
 - ✅ Interfaces for type safety
@@ -376,7 +382,7 @@ All interactive elements provide feedback:
 
 ---
 
-## 🔧 Development Notes
+## 🔧 Development Notes <a id="development-notes"></a>
 
 ### Current Limitations (CIA-2 Phase)
 - Audio playback is simulated (no actual audio files)
@@ -397,7 +403,7 @@ All interactive elements provide feedback:
 
 ---
 
-## 📝 Documentation
+## 📝 Documentation <a id="documentation"></a>
 
 ### Code Documentation
 - Inline comments for complex logic
@@ -434,7 +440,7 @@ ng lint
 
 
 
-## 📄 License
+## 📄 License <a id="license"></a>
 
 This project is created for educational purposes as part of the Web Technologies course.
 
@@ -442,13 +448,13 @@ This project is created for educational purposes as part of the Web Technologies
 
 
 
-## 🎓 Academic Integrity
+## 🎓 Academic Integrity <a id="academic-integrity"></a>
 
 This project is submitted as part of CIA-2 coursework. All work is original and created by the team members listed above. External resources and libraries are properly attributed.
 
 ---
 
-## 📊 Project Statistics
+## 📊 Project Statistics <a id="project-statistics"></a>
 
 - **Components**: 5
 - **Models**: 4 (Song, Artist, Album, Playlist)
@@ -459,7 +465,7 @@ This project is submitted as part of CIA-2 coursework. All work is original and 
 
 ---
 
-## 🌟 Highlights
+## 🌟 Highlights <a id="highlights"></a>
 
 ✨ **Clean Architecture** - Modular, scalable component design  
 ✨ **Type Safety** - Full TypeScript implementation  
