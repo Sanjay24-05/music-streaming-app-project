@@ -2,53 +2,72 @@
   padding: 24px;
   max-width: 1400px;
   margin: 0 auto;
+  color: #e6e9ef;
 }
 
+/* ===== Page Title ===== */
 .page-title {
   font-size: 2rem;
   margin-bottom: 24px;
-  color: #333;
+  color: #ffffff;
 }
 
+/* ===== Grid ===== */
 .songs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
 }
 
+/* ===== Song Card ===== */
 .song-card {
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #161a21;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .song-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
+/* ===== Cover ===== */
 .song-cover {
   height: 280px;
   object-fit: cover;
 }
 
+/* ===== Song Info ===== */
 .song-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 12px;
+  padding: 0 16px;
 }
 
+.song-info h3,
+.song-info p {
+  color: #e6e9ef;
+}
+
+/* ===== Duration ===== */
 .duration {
-  color: #666;
+  color: #9aa4b2;
   margin: 0;
 }
 
+/* ===== Actions ===== */
 .song-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
+  border-top: 1px solid #1f2430;
 }
 
+/* ===== Favorite ===== */
 .favorite-active {
-  color: #e91e63;
+  color: #1db954;
 }

@@ -2,12 +2,18 @@
   padding: 24px;
   max-width: 600px;
   margin: 0 auto;
+  color: #e6e9ef;
 }
 
+/* ===== Player Card ===== */
 .player-card {
   padding: 32px;
+  background-color: #161a21;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
+/* ===== Content ===== */
 .player-content {
   display: flex;
   flex-direction: column;
@@ -15,13 +21,15 @@
   gap: 24px;
 }
 
+/* ===== Album Art ===== */
 .album-cover img {
   width: 300px;
   height: 300px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
 }
 
+/* ===== Song Info ===== */
 .song-info {
   text-align: center;
 }
@@ -29,14 +37,16 @@
 .song-info h2 {
   margin: 0 0 8px 0;
   font-size: 1.8rem;
+  color: #ffffff;
 }
 
 .song-info p {
   margin: 0;
-  color: #666;
+  color: #9aa4b2;
   font-size: 1.1rem;
 }
 
+/* ===== Progress ===== */
 .progress-section {
   display: flex;
   align-items: center;
@@ -49,20 +59,27 @@
 }
 
 .time {
-  color: #666;
+  color: #9aa4b2;
   font-size: 0.9rem;
   min-width: 45px;
 }
 
+/* ===== Controls ===== */
 .controls {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .play-button {
   width: 64px;
   height: 64px;
+  background-color: #1db954;
+  color: #000;
+}
+
+.play-button:hover {
+  background-color: #1ed760;
 }
 
 .play-button mat-icon {
@@ -75,8 +92,10 @@
   font-size: 32px;
   width: 32px;
   height: 32px;
+  color: #e6e9ef;
 }
 
+/* ===== Volume ===== */
 .volume-section {
   display: flex;
   align-items: center;
@@ -90,7 +109,7 @@
 }
 
 .volume-value {
-  color: #666;
+  color: #9aa4b2;
   font-size: 0.9rem;
   min-width: 40px;
 }

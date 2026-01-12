@@ -2,21 +2,28 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  background-color: #0f1115;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid #1f2430;
 }
 
+/* ===== App Title ===== */
 .app-title {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: #e6e9ef;
 }
 
+/* Spacer stays same */
 .spacer {
   flex: 1 1 auto;
 }
 
+/* ===== Nav Links ===== */
 .nav-links {
   display: flex;
   gap: 8px;
@@ -25,13 +32,28 @@
 .nav-links a {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #9aa4b2;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.nav-links a:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Active Route */
 .active-link {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(29, 185, 84, 0.15);
+  color: #1db954;
 }
 
+/* Icons */
 mat-icon {
   vertical-align: middle;
+  color: inherit;
 }

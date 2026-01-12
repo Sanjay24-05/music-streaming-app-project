@@ -2,16 +2,18 @@
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  color: #e6e9ef;
 }
 
+/* ===== HEADER / HERO ===== */
 .artist-header {
   display: flex;
   gap: 32px;
   margin-bottom: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   padding: 48px;
-  border-radius: 12px;
-  color: white;
+  border-radius: 16px;
+  color: #ffffff;
 }
 
 .artist-image {
@@ -19,7 +21,7 @@
   height: 250px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .artist-info {
@@ -38,22 +40,28 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 0;
+  color: #cbd5f5;
 }
 
+/* ===== BIOGRAPHY ===== */
 .biography-card {
   margin-bottom: 32px;
+  background-color: #161a21;
+  border-radius: 14px;
 }
 
 .biography-card p {
   line-height: 1.6;
-  color: #666;
+  color: #9aa4b2;
 }
 
+/* ===== TOP TRACKS ===== */
 .top-tracks-section h2 {
   font-size: 1.8rem;
   margin-bottom: 16px;
+  color: #ffffff;
 }
 
 .tracks-list {
@@ -62,16 +70,20 @@
   gap: 12px;
 }
 
+/* ===== TRACK CARD ===== */
 .track-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  transition: background-color 0.2s;
+  border-radius: 12px;
+  background-color: #161a21;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .track-card:hover {
-  background-color: #f5f5f5;
+  background-color: #1f2430;
+  transform: translateY(-2px);
 }
 
 .track-content {
@@ -82,26 +94,27 @@
 }
 
 .track-number {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  color: #666;
+  color: #9aa4b2;
   min-width: 30px;
 }
 
 .track-cover {
   width: 60px;
   height: 60px;
-  border-radius: 4px;
+  border-radius: 6px;
   object-fit: cover;
 }
 
 .track-info h3 {
   margin: 0 0 4px 0;
   font-size: 1.1rem;
+  color: #e6e9ef;
 }
 
 .track-info p {
   margin: 0;
-  color: #666;
+  color: #9aa4b2;
   font-size: 0.9rem;
 }
