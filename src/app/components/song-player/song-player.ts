@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   templateUrl: './song-player.html',
-  styleUrl: './song-player.css'  // Note: styleUrl not styleUrls
+  styleUrl: './song-player.css'
 })
 export class SongPlayerComponent {
   isPlaying = false;
@@ -34,14 +34,18 @@ export class SongPlayerComponent {
 
   togglePlayPause(): void {
     this.isPlaying = !this.isPlaying;
+    const action = this.isPlaying ? 'Play' : 'Pause';
+    alert(`${this.isPlaying ? '▶️' : '⏸️'} ${action} "${this.currentSong.title}"\n\nFull playback functionality will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• HTML5 Audio element\n• Real-time progress tracking\n• Audio controls`);
     console.log(this.isPlaying ? 'Playing' : 'Paused');
   }
 
   skipPrevious(): void {
+    alert('⏮️ Previous Track\n\nThis will be implemented in CIA-3 with:\n• Queue management\n• Track history\n• AudioService integration');
     console.log('Previous track');
   }
 
   skipNext(): void {
+    alert('⏭️ Next Track\n\nThis will be implemented in CIA-3 with:\n• Queue management\n• Autoplay functionality\n• AudioService integration');
     console.log('Next track');
   }
 
@@ -50,6 +54,14 @@ export class SongPlayerComponent {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
+
+  onProgressChange(): void {
+    console.log('Progress changed to:', this.currentTime);
+    // In CIA-3: Will seek audio to this position
+  }
+
+  onVolumeChange(): void {
+    console.log('Volume changed to:', this.volume);
+    // In CIA-3: Will adjust audio volume
+  }
 }
-
-

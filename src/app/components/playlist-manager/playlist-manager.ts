@@ -12,38 +12,42 @@ import { MOCK_PLAYLISTS } from '../../data/mock-data';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatChipsModule],
   templateUrl: './playlist-manager.html',
-  styleUrls: ['./playlist-manager.css']
+  styleUrl: './playlist-manager.css'
 })
 export class PlaylistManagerComponent implements OnInit {
   playlists: Playlist[] = [];
 
   ngOnInit(): void {
-    this.playlists = MOCK_PLAYLISTS;
+    this.playlists = [...MOCK_PLAYLISTS];
   }
 
   createPlaylist(): void {
-    console.log('Create new playlist');
-    // Will be implemented with forms in later tasks
+    alert('🎵 Create Playlist Feature\n\nThis will be implemented in CIA-3 using:\n• Angular Forms (Task 5)\n• Form Validation\n• Services for data management (Task 4)');
+    console.log('Create playlist clicked - Will be implemented in CIA-3');
   }
 
   editPlaylist(playlist: Playlist): void {
-    console.log('Editing playlist:', playlist.name);
-    // Will be implemented with forms in later tasks
+    alert(`✏️ Edit Playlist: "${playlist.name}"\n\nThis feature will be implemented in CIA-3 using:\n• Reactive Forms (Task 5)\n• Form pre-population\n• Update operations`);
+    console.log('Edit playlist clicked:', playlist.name);
   }
 
   deletePlaylist(playlist: Playlist): void {
-    const index = this.playlists.findIndex(p => p.id === playlist.id);
-    if (index > -1) {
-      this.playlists.splice(index, 1);
-      console.log('Deleted playlist:', playlist.name);
+    const confirmDelete = confirm(`🗑️ Delete "${playlist.name}"?\n\nThis is a demonstration. Full delete functionality will be implemented in CIA-3.`);
+    
+    if (confirmDelete) {
+      alert('✅ Delete confirmed!\n\nIn CIA-3, this will:\n• Remove from database\n• Update UI dynamically\n• Use Services for state management');
+      console.log('Delete confirmed for:', playlist.name);
+    } else {
+      console.log('Delete cancelled');
     }
   }
 
   playPlaylist(playlist: Playlist): void {
-    console.log('Playing playlist:', playlist.name);
+    alert(`▶️ Play "${playlist.name}"\n\nPlayback functionality will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• Media player controls\n• Queue management`);
+    console.log('Play playlist:', playlist.name);
   }
 
-
-getPrivacyClass(privacy: string): string {
-  return `privacy-${privacy.toLowerCase()}`;
-}}
+  getPrivacyClass(privacy: string): string {
+    return `privacy-${privacy.toLowerCase()}`;
+  }
+}

@@ -12,14 +12,14 @@ import { MOCK_ARTISTS, MOCK_SONGS } from '../../data/mock-data';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatChipsModule],
   templateUrl: './artist-detail.html',
-  styleUrls: ['./artist-detail.css']
+  styleUrl: './artist-detail.css'
 })
 export class ArtistDetailComponent implements OnInit {
   artist: Artist | null = null;
   topTracks: Song[] = [];
 
   ngOnInit(): void {
-    // For now, showing first artist. Will use route params in Task 3
+    // For CIA-2, showing first artist. Dynamic routing in CIA-3 (Task 3)
     this.artist = MOCK_ARTISTS[0];
     if (this.artist) {
       this.loadTopTracks(this.artist.id);
@@ -31,10 +31,12 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   playSong(song: Song): void {
+    alert(`▶️ Playing: "${song.title}"\n\nAudio playback will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• HTML5 Audio API\n• Player controls`);
     console.log('Playing:', song.title);
   }
 
   followArtist(): void {
+    alert(`👤 Follow ${this.artist?.name}\n\nThis will be implemented in CIA-3 with:\n• UserService (Task 4)\n• Follow/Unfollow toggle\n• Persistent user preferences\n• Artist notifications`);
     console.log('Following artist:', this.artist?.name);
   }
 }
