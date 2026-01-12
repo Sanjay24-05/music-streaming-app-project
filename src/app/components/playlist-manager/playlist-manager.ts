@@ -32,15 +32,24 @@ export class PlaylistManagerComponent implements OnInit {
   }
 
   deletePlaylist(playlist: Playlist): void {
-    const confirmDelete = confirm(`🗑️ Delete "${playlist.name}"?\n\nThis is a demonstration. Full delete functionality will be implemented in CIA-3.`);
-    
-    if (confirmDelete) {
-      alert('✅ Delete confirmed!\n\nIn CIA-3, this will:\n• Remove from database\n• Update UI dynamically\n• Use Services for state management');
-      console.log('Delete confirmed for:', playlist.name);
-    } else {
-      console.log('Delete cancelled');
-    }
+  const confirmDelete = confirm(
+    `🗑️ Delete "${playlist.name}"?\n\nThis is a demonstration. Full delete functionality will be implemented in CIA-3.`
+  );
+
+  if (confirmDelete) {
+    // TEMPORARY delete: remove from local array only
+    this.playlists = this.playlists.filter(p => p.id !== playlist.id);
+
+    alert(
+      '✅ Playlist removed (temporarily)\n\nIn CIA-3, this will:\n• Remove from database\n• Update UI via service\n• Persist across refresh'
+    );
+
+    console.log('Temporarily deleted:', playlist.name);
+  } else {
+    console.log('Delete cancelled');
   }
+}
+
 
   playPlaylist(playlist: Playlist): void {
     alert(`▶️ Play "${playlist.name}"\n\nPlayback functionality will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• Media player controls\n• Queue management`);
