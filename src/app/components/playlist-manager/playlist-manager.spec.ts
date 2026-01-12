@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlaylistManager } from './playlist-manager';
+import { PlaylistManagerComponent } from './playlist-manager';
 
 describe('PlaylistManager', () => {
-  let component: PlaylistManager;
-  let fixture: ComponentFixture<PlaylistManager>;
+  let component: PlaylistManagerComponent;
+  let fixture: ComponentFixture<PlaylistManagerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlaylistManager]
+      imports: [PlaylistManagerComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PlaylistManager);
+    fixture = TestBed.createComponent(PlaylistManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
