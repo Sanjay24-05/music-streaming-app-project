@@ -39,10 +39,6 @@ This project is a Single Page Application (SPA) that allows users to:
 - Control audio playback (planned for CIA-3)
 - Organize music by genres, artists, and albums
 
-**Course**: Web Technologies  
-**Project Phase**: CIA-2 (Foundation & Architecture)  
-**Academic Year**: 2024-2025
-
 ---
 
 ## 🚀 Current Status (CIA-2) <a id="current-status-cia-2"></a>
@@ -155,34 +151,62 @@ music-streaming-app/
 │   ├── app/
 │   │   ├── components/
 │   │   │   ├── navbar/
-│   │   │   │   ├── navbar.component.ts
-│   │   │   │   ├── navbar.component.html
-│   │   │   │   └── navbar.component.css
+│   │   │   │   ├── navbar.ts
+│   │   │   │   ├── navbar.html
+│   │   │   │   ├── navbar.css
+│   │   │   │   └── navbar.spec.ts
+│   │   │   │
 │   │   │   ├── song-list/
+│   │   │   │   ├── song-list.ts
+│   │   │   │   ├── song-list.html
+│   │   │   │   ├── song-list.css
+│   │   │   │   └── song-list.spec.ts
+│   │   │   │
 │   │   │   ├── song-player/
+│   │   │   │   ├── song-player.ts
+│   │   │   │   ├── song-player.html
+│   │   │   │   ├── song-player.css
+│   │   │   │   └── song-player.spec.ts
+│   │   │   │
 │   │   │   ├── playlist-manager/
+│   │   │   │   ├── playlist-manager.ts
+│   │   │   │   ├── playlist-manager.html
+│   │   │   │   ├── playlist-manager.css
+│   │   │   │   └── playlist-manager.spec.ts
+│   │   │   │
 │   │   │   └── artist-detail/
+│   │   │       ├── artist-detail.ts
+│   │   │       ├── artist-detail.html
+│   │   │       ├── artist-detail.css
+│   │   │       └── artist-detail.spec.ts
+│   │   │
 │   │   ├── models/
 │   │   │   ├── song.model.ts
 │   │   │   ├── artist.model.ts
 │   │   │   ├── album.model.ts
 │   │   │   ├── playlist.model.ts
 │   │   │   └── index.ts
+│   │   │
 │   │   ├── data/
 │   │   │   └── mock-data.ts
-│   │   ├── app.component.ts
-│   │   ├── app.component.html
-│   │   ├── app.component.css
+│   │   │
+│   │   ├── app.ts
+│   │   ├── app.html
+│   │   ├── app.css
 │   │   ├── app.config.ts
 │   │   └── app.routes.ts
+│   │
 │   ├── assets/
 │   │   └── images/
+│   │
 │   ├── styles.css
 │   └── main.ts
+│
 ├── angular.json
 ├── package.json
 ├── tsconfig.json
 └── README.md
+
 ```
 
 ---
