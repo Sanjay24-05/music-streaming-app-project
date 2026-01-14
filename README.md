@@ -489,9 +489,6 @@ This project is submitted as part of CIA-2 coursework. All work is original and 
 - **Components**: 5
 - **Models**: 4 (Song, Artist, Album, Playlist)
 - **Routes**: 4
-- **Lines of Code**: ~2000+
-- **Development Time**: [X weeks]
-- **Team Size**: [X members]
 
 ---
 
