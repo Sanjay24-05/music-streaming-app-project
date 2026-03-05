@@ -1,4 +1,3 @@
-
 <div class="playlist-manager-container">
   <div class="header">
     <h2 class="page-title">My Playlists</h2>
@@ -9,53 +8,74 @@
   </div>
 
   <div class="playlists-grid">
-    <mat-card *ngFor="let playlist of playlists" class="playlist-card">
-      <img 
-        mat-card-image 
-        [src]="playlist.coverImageUrl" 
-        [alt]="playlist.name"
-        class="playlist-cover"
-      />
-      
-      <mat-card-header>
-        <mat-card-title>{{ playlist.name }}</mat-card-title>
-        <mat-card-subtitle>{{ playlist.getSongCount() }} songs</mat-card-subtitle>
-      </mat-card-header>
-      
-      <mat-card-content>
-        <p class="description">{{ playlist.description }}</p>
+    @for (playlist of playlists; track playlist.id) {
+    <mat-card class="playlist-card">
+      <div class="playlist-header-section">
+        <div class="playlist-meta">
+          <h3 class="playlist-name">{{ playlist.name }}</h3>
+          <span class="song-count">{{ playlist.songIds.length }} songs</span>
+        </div>
         <mat-chip-set>
           <mat-chip [ngClass]="getPrivacyClass(playlist.privacy)">
             {{ playlist.privacy }}
           </mat-chip>
         </mat-chip-set>
+      </div>
+
+      <mat-card-content>
+        <p class="description">{{ playlist.description }}</p>
+        <p class="updated-date">Updated {{ playlist.updatedDate | date:'mediumDate' }}</p>
+
+        <!-- Songs in playlist -->
+        @if (getPlaylistSongs(playlist).length > 0) {
+        <div class="playlist-songs">
+          @for (song of getPlaylistSongs(playlist); track song.id; let i = $index) {
+          <div class="playlist-song-item">
+            <span class="song-number">{{ i + 1 }}</span>
+            <img [src]="song.coverImageUrl" [alt]="song.title" class="song-thumb">
+            <div class="song-details">
+              <span class="song-title">{{ song.title }}</span>
+              <span class="song-artist">{{ getArtistName(song.id) }}</span>
+            </div>
+            <span class="song-duration">{{ song.duration | duration }}</span>
+            <button mat-icon-button (click)="removeSong(playlist.id, song.id)" class="remove-btn">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+        } @else {
+        <p class="empty-playlist">No songs yet — browse the library to add songs</p>
+        }
       </mat-card-content>
-      
+
       <mat-card-actions class="playlist-actions">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          (click)="playPlaylist(playlist)"
-        >
+        <button mat-raised-button color="primary" (click)="playPlaylist(playlist)"
+          [disabled]="playlist.songIds.length === 0">
           <mat-icon>play_arrow</mat-icon>
-          Play
+          Play All
         </button>
-        
-        <button 
-          mat-icon-button 
-          (click)="editPlaylist(playlist)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        
-        <button 
-          mat-icon-button 
-          color="warn"
-          (click)="deletePlaylist(playlist)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+
+        <div class="action-buttons">
+          <button mat-icon-button (click)="editPlaylist(playlist)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletePlaylist(playlist)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-card-actions>
     </mat-card>
+    } @empty {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">playlist_add</mat-icon>
+      <h3>No playlists yet</h3>
+      <p>Create your first playlist to start organizing your music</p>
+      <button mat-raised-button color="primary" (click)="createPlaylist()">
+        <mat-icon>add</mat-icon>
+        Create Playlist
+      </button>
+    </div>
+    }
   </div>
 </div>

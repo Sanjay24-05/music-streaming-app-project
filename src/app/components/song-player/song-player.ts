@@ -1,67 +1,116 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
-import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { Subscription } from 'rxjs';
+import { Song } from '../../models';
+import { AudioService } from '../../services/audio.service';
+import { MusicService } from '../../services/music.service';
+import { DurationPipe } from '../../pipes/duration.pipe';
+import { AlbumAnimateDirective } from '../../directives/album-animate.directive';
 
 @Component({
   selector: 'app-song-player',
   standalone: true,
   imports: [
-    CommonModule, 
-    MatCardModule, 
-    MatButtonModule, 
-    MatIconModule, 
-    MatSliderModule,
-    FormsModule
+    CommonModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule,
+    MatSliderModule, MatListModule,
+    DurationPipe, AlbumAnimateDirective
   ],
   templateUrl: './song-player.html',
   styleUrl: './song-player.css'
 })
-export class SongPlayerComponent {
+export class SongPlayerComponent implements OnInit, OnDestroy {
+  currentSong: Song | null = null;
   isPlaying = false;
   currentTime = 0;
-  duration = 215; // Mock duration in seconds
+  duration = 0;
   volume = 70;
-  
-  currentSong = {
-    title: 'Blinding Lights',
-    artist: 'The Weeknd',
-    coverImage: 'assets/images/after-hours.jpg'
-  };
+  queue: Song[] = [];
+
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private audioService: AudioService,
+    private musicService: MusicService
+  ) { }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.audioService.currentSong$.subscribe(song => {
+        this.currentSong = song;
+      }),
+      this.audioService.isPlaying$.subscribe(playing => {
+        this.isPlaying = playing;
+      }),
+      this.audioService.currentTime$.subscribe(time => {
+        this.currentTime = time;
+      }),
+      this.audioService.duration$.subscribe(dur => {
+        this.duration = dur;
+      }),
+      this.audioService.volume$.subscribe(vol => {
+        this.volume = vol;
+      })
+    );
+
+    // If no song is playing, load all songs into queue
+    if (!this.currentSong) {
+      this.musicService.getSongs().subscribe(songs => {
+        if (songs.length > 0 && !this.currentSong) {
+          this.audioService.setQueue(songs);
+          this.queue = songs;
+        }
+      });
+    } else {
+      this.queue = this.audioService.getQueue();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 
   togglePlayPause(): void {
-    this.isPlaying = !this.isPlaying;
-    const action = this.isPlaying ? 'Play' : 'Pause';
-    alert(`${this.isPlaying ? '▶️' : '⏸️'} ${action} "${this.currentSong.title}"\n\nFull playback functionality will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• HTML5 Audio element\n• Real-time progress tracking\n• Audio controls`);
-    console.log(this.isPlaying ? 'Playing' : 'Paused');
+    if (!this.currentSong && this.queue.length > 0) {
+      this.audioService.playAll(this.queue);
+    } else {
+      this.audioService.togglePlayPause();
+    }
   }
 
   skipPrevious(): void {
-    alert('⏮️ Previous Track\n\nThis will be implemented in CIA-3 with:\n• Queue management\n• Track history\n• AudioService integration');
-    console.log('Previous track');
+    this.audioService.previous();
   }
 
   skipNext(): void {
-    alert('⏭️ Next Track\n\nThis will be implemented in CIA-3 with:\n• Queue management\n• Autoplay functionality\n• AudioService integration');
-    console.log('Next track');
+    this.audioService.next();
   }
 
-  formatTime(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  onSeek(value: number): void {
+    this.audioService.seek(value);
   }
 
-  onProgressChange(): void {
-    console.log('Progress changed to:', this.currentTime);
-    // In CIA-3: Will seek audio to this position
+  onVolumeChange(value: number): void {
+    this.audioService.setVolume(value);
   }
 
-  onVolumeChange(): void {
-    console.log('Volume changed to:', this.volume);
-    // In CIA-3: Will adjust audio volume
+  getArtistName(artistId: number): string {
+    return this.musicService.getArtistNameSync(artistId);
+  }
+
+  getVolumeIcon(): string {
+    if (this.volume === 0) return 'volume_off';
+    if (this.volume < 40) return 'volume_down';
+    return 'volume_up';
+  }
+
+  playFromQueue(index: number): void {
+    this.audioService.playSongFromQueue(index);
   }
 }

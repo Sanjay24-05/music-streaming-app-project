@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Playlist' : 'Create New Playlist' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="playlistForm" class="playlist-form">
+    <!-- Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Playlist Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter playlist name">
+      @if (playlistForm.get('name')?.hasError('required') && playlistForm.get('name')?.touched) {
+        <mat-error>Name is required</mat-error>
+      }
+      @if (playlistForm.get('name')?.hasError('minlength')) {
+        <mat-error>Name must be at least 3 characters</mat-error>
+      }
+      @if (playlistForm.get('name')?.hasError('maxlength')) {
+        <mat-error>Name cannot exceed 50 characters</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3" placeholder="Describe your playlist"></textarea>
+      @if (playlistForm.get('description')?.hasError('maxlength')) {
+        <mat-error>Description cannot exceed 200 characters</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Privacy -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Privacy</mat-label>
+      <mat-select formControlName="privacy">
+        @for (option of privacyOptions; track option) {
+          <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="playlistForm.invalid"
+  >
+    {{ isEditMode ? 'Save Changes' : 'Create Playlist' }}
+  </button>
+</mat-dialog-actions>

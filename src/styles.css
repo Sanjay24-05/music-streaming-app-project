@@ -1,4 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===== Global Styles ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== Snackbar Customization ===== */
+.success-snackbar {
+    --mdc-snackbar-container-color: #1db954;
+    --mdc-snackbar-supporting-text-color: #000;
+}
+
+.error-snackbar {
+    --mdc-snackbar-container-color: #ef4444;
+    --mdc-snackbar-supporting-text-color: #fff;
+}
+
+/* ===== Global Transitions ===== */
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===== Light Theme Overrides for Component Cards ===== */
+body.light-theme .song-card,
+body.light-theme .playlist-card,
+body.light-theme .player-card,
+body.light-theme .biography-card,
+body.light-theme .track-card,
+body.light-theme .queue-card,
+body.light-theme .login-card,
+body.light-theme .feedback-card {
+    background-color: var(--app-card-bg) !important;
+    color: var(--app-text) !important;
+}
+
+body.light-theme .navbar {
+    background-color: #ffffff !important;
+    border-bottom-color: var(--app-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .main-content {
+    background-color: var(--app-bg) !important;
+    color: var(--app-text) !important;
+}
+
+body.light-theme .page-title {
+    color: var(--app-text) !important;
+}
+
+body.light-theme .artist-header {
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%) !important;
+    color: #1a1a2e !important;
+}
+
+body.light-theme .mini-player {
+    background-color: rgba(22, 163, 74, 0.1) !important;
+}

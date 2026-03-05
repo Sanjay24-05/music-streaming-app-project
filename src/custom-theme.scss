@@ -1,31 +1,55 @@
-
 // Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// === DARK THEME (default) ===
 html {
- @include mat.theme((
-  color: (
-    primary: mat.$green-palette,
-    tertiary: mat.$violet-palette,
-    theme-type: dark,
-  ),
-  typography: Roboto,
-  density: 0,
-));
-
+  @include mat.theme((color: (primary: mat.$green-palette,
+        tertiary: mat.$violet-palette,
+        theme-type: dark,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
 }
 
+// === LIGHT THEME ===
+body.light-theme {
+  @include mat.theme((color: (primary: mat.$green-palette,
+        tertiary: mat.$violet-palette,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+// === Body Defaults ===
 body {
-  /* Enable Material dark mode */
+  /* Dark mode default */
   color-scheme: dark;
-
-  background-color: #0f1115; /* match your app */
-  color: #e6e9ef;
+  background-color: var(--app-bg, #0f1115);
+  color: var(--app-text, #e6e9ef);
   font: var(--mat-sys-body-medium);
-
   margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme {
+  --app-bg: #0f1115;
+  --app-text: #e6e9ef;
+  --app-card-bg: #161a21;
+  --app-border: #1f2430;
+  --app-muted: #9aa4b2;
+  --app-accent: #1db954;
+  color-scheme: dark;
+}
+
+body.light-theme {
+  --app-bg: #f5f5f7;
+  --app-text: #1a1a2e;
+  --app-card-bg: #ffffff;
+  --app-border: #e5e7eb;
+  --app-muted: #6b7280;
+  --app-accent: #16a34a;
+  color-scheme: light;
 }

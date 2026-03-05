@@ -12,6 +12,23 @@
   color: #ffffff;
 }
 
+/* ===== Filter Bar ===== */
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 250px;
+}
+
+.genre-field {
+  min-width: 180px;
+}
+
 /* ===== Grid ===== */
 .songs-grid {
   display: grid;
@@ -56,6 +73,15 @@
 .duration {
   color: #9aa4b2;
   margin: 0;
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* ===== Release Date ===== */
+.release-date {
+  color: #6b7280;
+  font-size: 0.85rem;
+  padding: 0 16px;
+  margin-top: 4px;
 }
 
 /* ===== Actions ===== */
@@ -69,5 +95,42 @@
 
 /* ===== Favorite ===== */
 .favorite-active {
-  color: #1db954;
+  color: #ef4444 !important;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 64px 24px;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  opacity: 0.4;
+  margin-bottom: 16px;
+}
+
+/* ===== Currently Playing Highlight ===== */
+:host ::ng-deep .currently-playing {
+  border-color: #1db954;
+  background-color: rgba(29, 185, 84, 0.05);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .song-list-container {
+    padding: 16px;
+  }
+
+  .songs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+  }
 }

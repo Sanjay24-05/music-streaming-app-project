@@ -1,0 +1,36 @@
+<div class="artists-list-container">
+    <h2 class="page-title">Artists</h2>
+
+    <div class="artists-grid">
+        @for (artist of artists; track artist.id) {
+        <mat-card class="artist-card" [routerLink]="['/artists', artist.id]">
+            <div class="artist-image-wrapper">
+                <img [src]="artist.imageUrl" [alt]="artist.name" class="artist-avatar">
+            </div>
+
+            <mat-card-header>
+                <mat-card-title>{{ artist.name }}</mat-card-title>
+                <mat-card-subtitle>
+                    <mat-icon class="small-icon">people</mat-icon>
+                    {{ artist.getFormattedListeners() }} monthly listeners
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <mat-chip-set>
+                    @for (genre of artist.genres; track genre) {
+                    <mat-chip>{{ genre }}</mat-chip>
+                    }
+                </mat-chip-set>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" [routerLink]="['/artists', artist.id]">
+                    <mat-icon>visibility</mat-icon>
+                    View Profile
+                </button>
+            </mat-card-actions>
+        </mat-card>
+        }
+    </div>
+</div>

@@ -32,59 +32,26 @@ A modern, feature-rich music streaming application built with Angular and TypeSc
 
 ## 🎯 Project Overview <a id="project-overview"></a>
 
-This project is a Single Page Application (SPA) that allows users to:
-- Browse and discover music tracks
-- View artist profiles and top tracks
-- Manage personalized playlists
-- Control audio playback (planned for CIA-3)
-- Organize music by genres, artists, and albums
+This project is a comprehensive **Music Streaming Single Page Application (SPA)** that allows users to:
+- **Discover Music**: Browse and search a diverse catalog of songs and artists
+- **Playback Control**: Real-time audio streaming with play/pause, skip, seek, and volume control
+- **Personalized Experience**: Manage favorites and create custom playlists
+- **Persistency**: Playlist data is saved locally for a consistent experience across sessions
+- **Modern UI**: Fully responsive design with dark mode support and rich animations
 
 ---
 
-## 🚀 Current Status (CIA-2) <a id="current-status-cia-2"></a>
+## 🚀 Current Status (CIA-3 - Full Implementation) <a id="current-status-cia-2"></a>
 
-### ✅ Completed Tasks
+Celebrating the successful completion of the full implementation phase! All core functionalities are now live.
 
-#### Task 1: Setup and TypeScript Fundamentals
-- [x] Angular environment setup using Angular CLI
-- [x] TypeScript interfaces for all data models (Song, Artist, Album, Playlist)
-- [x] TypeScript classes with methods and constructors
-- [x] Enums for Genre and PlaylistPrivacy
-- [x] Access modifiers (public, private) implementation
-- [x] Inheritance and object-oriented design patterns
-
-#### Task 2: Angular Architecture and Component Design
-- [x] Five modular components created:
-  - `song-list` - Displays all songs with interactive controls
-  - `song-player` - Audio player interface with controls
-  - `playlist-manager` - Playlist creation and management UI
-  - `artist-detail` - Artist biography and top tracks display
-  - `navbar` - Application navigation bar
-- [x] Data binding (*ngIf, *ngFor, property binding, event binding)
-- [x] Angular directives ([ngClass], [ngStyle])
-- [x] Angular Material components integration
-- [x] Responsive grid layouts
-- [x] Mock data service for testing
-
-### 🎨 UI/UX Features
-- Modern, clean interface using Angular Material Design
-- Responsive layout for desktop and mobile
-- Smooth animations and transitions
-- Interactive button states with hover effects
-- Professional color scheme and typography
-
-### 💡 Interactive Elements
-All buttons are functional and provide user feedback through:
-- **Alert dialogs** explaining feature status
-- **Console logging** for event verification
-- **Visual feedback** (hover states, active states)
-- **Clear messaging** about CIA-3 implementation
-
-Example interactions:
-- ✅ Play buttons show playback alerts
-- ✅ Favorite button toggles with visual feedback
-- ✅ Create/Edit/Delete buttons explain upcoming features
-- ✅ Navigation fully functional between all pages
+### ✅ Completed Implementation
+- **Audio Streaming Engine**: Integrated `AudioService` with live streaming from varied placeholder sources for a realistic testing environment.
+- **Playlist Persistence**: Developed a `PlaylistService` that uses `LocalStorage` to persist user-created playlists and favorites.
+- **Dynamic Content**: Implemented `MusicService` to handle complex data relationships between songs, artists, and albums.
+- **Custom Pipes & Directives**: Added `DurationPipe` for time formatting and `AlbumAnimateDirective` for smooth UI transitions.
+- **Responsive Navigation**: Full routing setup with lazy loading and deep linking support.
+- **Modern UI Components**: Leveraged Angular Material 20+ for a high-quality, professional user interface.
 
 ---
 
@@ -121,24 +88,50 @@ app/
 
 ---
 
-## 💻 Tech Stack <a id="tech-stack"></a>
+## �️ Architecture Diagram
 
-### Frontend Framework
-- **Angular**: 20.3.10
-- **TypeScript**: 5.x
-- **Angular Material**: Latest
+```mermaid
+graph TD
+    subgraph "Frontend (Angular)"
+        App[App Component]
+        Nav[Navbar Component]
+        SL[Song List Component]
+        AD[Artist Detail Component]
+        PM[Playlist Manager Component]
+        SP[Song Player Component]
+        
+        App --> Nav
+        App --> SL
+        App --> AD
+        App --> PM
+        App --> SP
+    end
 
-### Development Tools
-- **Node.js**: 24.11
-- **npm**: 11.6.1
-- **Angular CLI**: Latest
-- **VS Code**: Recommended IDE
+    subgraph "Services (Business Logic)"
+        MS[Music Service]
+        AS[Audio Service]
+        PS[Playlist Service]
+        US[User Service]
+    end
 
-### Key Dependencies
-- `@angular/material` - UI component library
-- `@angular/router` - SPA routing
-- `@angular/forms` - Form handling (for CIA-3)
-- `@angular/common/http` - HTTP client (for CIA-3)
+    subgraph "Data & External"
+        MD[Mock Data]
+        LS[(Local Storage)]
+        SH[SoundHelix - Placeholder Audio]
+    end
+
+    SL -.-> MS
+    AD -.-> MS
+    PM -.-> PS
+    SP -.-> AS
+    SP -.-> MS
+    SL -.-> US
+    
+    MS -.-> MD
+    PS -.-> MD
+    PS -.-> LS
+    AS -.-> SH
+```
 
 ---
 
@@ -213,40 +206,40 @@ music-streaming-app/
 
 ## ⚙️ Installation & Setup <a id="installation--setup"></a>
 
-### Prerequisites
-```bash
-Node.js >= 24.x
-npm >= 11.x
-Angular CLI >= 20.x
-```
-
-### Installation Steps
-
-1. **Clone the repository**
+### Step 1: Clone and Install
 ```bash
 git clone https://github.com/Sanjay24-05/music-streaming-app-project.git
 cd music-streaming-app-project
-```
-
-2. **Install dependencies**
-```bash
 npm install
 ```
 
-3. **Run development server**
+### Step 2: Launch the App
 ```bash
+# Start the development server
 ng serve
 ```
 
-4. **Open in browser**
-```
-Navigate to http://localhost:4200
-```
+### Step 3: Access
+Navigate to **`http://localhost:4200`** in your browser.
 
-### Build for Production
-```bash
-ng build --configuration production
-```
+---
+
+## 📸 Screenshots <a id="screenshots"></a>
+
+> [!NOTE]
+> Screenshots are being updated. Check back soon for the latest visual previews of CIA-3 features.
+
+### 🏠 Song Library
+<!-- Placeholder for Library Screenshot -->
+*[Library Screenshot Placeholder]*
+
+### 🎵 Now Playing
+<!-- Placeholder for Player Screenshot -->
+*[Player Screenshot Placeholder]*
+
+### 📋 Playlist Manager
+<!-- Placeholder for Playlist Screenshot -->
+*[Playlist Screenshot Placeholder]*
 
 ---
 
@@ -320,61 +313,10 @@ All interactive elements provide feedback:
 
 ## 🗺️ Roadmap <a id="roadmap"></a>
 
-### CIA-2: Foundation ✅ (Current Phase)
-- [x] TypeScript data models and interfaces
-- [x] Component architecture and UI design
-- [x] Angular Material integration
-- [x] Basic routing and navigation
-- [x] Mock data implementation
-- [x] Responsive design
-
-### CIA-3: Full Implementation 🚧 (Upcoming)
-
-#### Task 3: Routing & Navigation
-- [ ] Dynamic route parameters for artists and albums
-- [ ] Lazy loading for performance optimization
-- [ ] Route guards for protected content
-- [ ] Deep linking support
-
-#### Task 4: Services & Dependency Injection
-- [ ] `MusicService` - Fetch and manage music data
-- [ ] `AudioService` - Control audio playback
-- [ ] `UserService` - Manage user preferences
-- [ ] HTTP Client integration
-- [ ] Observable data streams
-- [ ] State management
-
-#### Task 5: Forms & Validation
-- [ ] Template-driven forms for quick inputs
-- [ ] Reactive forms for complex playlist creation
-- [ ] Form validation (required fields, patterns)
-- [ ] Live validation feedback
-- [ ] Error handling and messaging
-
-#### Task 6: Custom Pipes & Directives
-- [ ] Filter songs by genre, artist, album
-- [ ] Duration formatting pipe
-- [ ] Date formatting for releases
-- [ ] Custom highlight directive for playing song
-- [ ] Animation directives for album covers
-
-#### Task 7: Advanced Material & Polish
-- [ ] Material Dialog for confirmations
-- [ ] Material Tabs for content organization
-- [ ] Material Slider for volume/progress
-- [ ] Dark mode theme support
-- [ ] Accessibility improvements
-- [ ] Performance optimization
-
-### Future Enhancements 💡
-- Backend API integration
-- User authentication
-- Real audio file uploads
-- Social features (sharing, following)
-- Recommendations algorithm
-- Search functionality
-- Lyrics display
-- Offline mode
+- [x] **CIA-1 & 2**: Project Setup, Models, and UI Skeleton
+- [x] **CIA-3 (Completed)**: Full Logic, Audio Streaming, Service Implementation, and State Persistence
+- [ ] **Phase 4**: Real Backend Integration (Next Feature)
+- [ ] **Phase 5**: User Authentication and Social Sharing
 
 ---
 
@@ -382,54 +324,33 @@ All interactive elements provide feedback:
 ## 📚 Key Concepts Demonstrated <a id="key-concepts-demonstrated"></a>
 
 ### TypeScript Features
-- ✅ Interfaces for type safety
-- ✅ Classes with constructors and methods
-- ✅ Enums for constants
-- ✅ Access modifiers (public, private, protected)
-- ✅ Inheritance and polymorphism
-- ✅ Type annotations and inference
+- ✅ **Type Safety**: Interfaces and Types for all models
+- ✅ **OOP**: Classes with constructors, methods, and inheritance
+- ✅ **Enums**: Structured constants for Genres and Privacy
+- ✅ **Encapsulation**: Proper use of `private`, `public`, and `readonly`
 
 ### Angular Features
-- ✅ Standalone components architecture
-- ✅ Template syntax and data binding
-- ✅ Structural directives (*ngIf, *ngFor)
-- ✅ Attribute directives ([ngClass], [ngStyle])
-- ✅ Event binding and handling
-- ✅ Component communication
-- ✅ Routing and navigation
-- ✅ Dependency injection
-- ✅ Angular Material components
-
-### Best Practices
-- ✅ Modular component design
-- ✅ Separation of concerns
-- ✅ DRY (Don't Repeat Yourself) principle
-- ✅ Responsive design patterns
-- ✅ User feedback mechanisms
-- ✅ Console logging for debugging
-- ✅ Code documentation
-- ✅ Version control with Git
+- ✅ **Standalone Components**: Modular architecture without NgModules
+- ✅ **Reactive Programming**: Extensive use of RxJS `BehaviorSubject` for state management
+- ✅ **Services & DI**: Centralized logic for Audio, Music, and Playlists
+- ✅ **Directives**: Custom `AlbumAnimateDirective` and `HighlightPlayingDirective`
+- ✅ **Pipes**: Custom `DurationPipe` for time formatting
+- ✅ **Persistence**: `LocalStorage` integration for data retention
 
 ---
 
 ## 🔧 Development Notes <a id="development-notes"></a>
 
-### Current Limitations (CIA-2 Phase)
-- Audio playback is simulated (no actual audio files)
-- Data is stored in memory (no persistence)
-- Forms show alerts instead of actual functionality
-- Artist page shows hardcoded first artist (dynamic routing in CIA-3)
-- No backend integration yet
-
-### Known Issues
-- None currently - all planned features working as designed for CIA-2
+### 💡 Implementation Highlights
+- **Audio Engine**: Uses the HTML5 Audio API wrapped in an Angular service for seamless control.
+- **State Management**: Uses RxJS Observables to synchronize playback state across different components (Player, Lists, Artists).
+- **Persistent Storage**: Playlists and favorites are stored in the browser's `LocalStorage`, allowing users to return to their saved data.
 
 ### Browser Compatibility
 - ✅ Chrome (Recommended)
 - ✅ Firefox
 - ✅ Edge
 - ✅ Safari
-- ⚠️ IE not supported (Angular requirement)
 
 ---
 
@@ -486,23 +407,21 @@ This project is submitted as part of CIA-2 coursework. All work is original and 
 
 ## 📊 Project Statistics <a id="project-statistics"></a>
 
-- **Components**: 5
-- **Models**: 4 (Song, Artist, Album, Playlist)
-- **Routes**: 4
+- **Components**: 9 Modular Components
+- **Services**: 4 Core Services
+- **Models**: 4 Data Models
+- **Routes**: 4 Primary Routes
 
 ---
 
 ## 🌟 Highlights <a id="highlights"></a>
 
 ✨ **Clean Architecture** - Modular, scalable component design  
-✨ **Type Safety** - Full TypeScript implementation  
-✨ **Modern UI** - Angular Material Design  
-✨ **Responsive** - Works on all device sizes  
-✨ **Professional** - Industry-standard practices  
-✨ **Well Documented** - Clear code and comments  
-✨ **Future Ready** - Prepared for CIA-3 enhancements  
+✨ **Dynamic Audio** - Real-time streaming from external placeholders  
+✨ **Persistent State** - LocalStorage-backed playlist management  
+✨ **Modern UI** - Sleek design using Angular Material  
+✨ **Responsive** - Optimized for all device sizes  
 
 ---
 
-
-*Last Updated: January 2026*
+*Last Updated: March 2026*

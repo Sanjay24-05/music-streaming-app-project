@@ -1,59 +1,129 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import { Playlist } from '../../models';
-import { MOCK_PLAYLISTS } from '../../data/mock-data';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
+import { Subscription } from 'rxjs';
+import { Playlist, Song } from '../../models';
+import { PlaylistService } from '../../services/playlist.service';
+import { MusicService } from '../../services/music.service';
+import { AudioService } from '../../services/audio.service';
+import { PlaylistDialogComponent, PlaylistDialogData } from '../playlist-dialog/playlist-dialog';
+import { DurationPipe } from '../../pipes/duration.pipe';
 
 @Component({
   selector: 'app-playlist-manager',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatChipsModule],
+  imports: [
+    CommonModule, DatePipe,
+    MatCardModule, MatButtonModule, MatIconModule, MatChipsModule,
+    MatDialogModule, MatSnackBarModule, MatListModule,
+    DurationPipe
+  ],
   templateUrl: './playlist-manager.html',
   styleUrl: './playlist-manager.css'
 })
-export class PlaylistManagerComponent implements OnInit {
+export class PlaylistManagerComponent implements OnInit, OnDestroy {
   playlists: Playlist[] = [];
+  allSongs: Song[] = [];
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private playlistService: PlaylistService,
+    private musicService: MusicService,
+    private audioService: AudioService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
-    this.playlists = [...MOCK_PLAYLISTS];
+    this.subscriptions.push(
+      this.playlistService.getPlaylists().subscribe(playlists => {
+        this.playlists = playlists;
+      }),
+      this.musicService.getSongs().subscribe(songs => {
+        this.allSongs = songs;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   createPlaylist(): void {
-    alert('🎵 Create Playlist Feature\n\nThis will be implemented in CIA-3 using:\n• Angular Forms (Task 5)\n• Form Validation\n• Services for data management (Task 4)');
-    console.log('Create playlist clicked - Will be implemented in CIA-3');
+    const dialogRef = this.dialog.open(PlaylistDialogComponent, {
+      width: '500px',
+      data: { mode: 'create' } as PlaylistDialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.playlistService.createPlaylist(result.name, result.description, result.privacy);
+        this.snackBar.open(`✅ Playlist "${result.name}" created!`, 'Dismiss', { duration: 3000 });
+      }
+    });
   }
 
   editPlaylist(playlist: Playlist): void {
-    alert(`✏️ Edit Playlist: "${playlist.name}"\n\nThis feature will be implemented in CIA-3 using:\n• Reactive Forms (Task 5)\n• Form pre-population\n• Update operations`);
-    console.log('Edit playlist clicked:', playlist.name);
+    const dialogRef = this.dialog.open(PlaylistDialogComponent, {
+      width: '500px',
+      data: {
+        mode: 'edit',
+        name: playlist.name,
+        description: playlist.description,
+        privacy: playlist.privacy
+      } as PlaylistDialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.playlistService.updatePlaylist(playlist.id, result.name, result.description, result.privacy);
+        this.snackBar.open(`✏️ Playlist updated!`, 'Dismiss', { duration: 3000 });
+      }
+    });
   }
 
   deletePlaylist(playlist: Playlist): void {
-  const confirmDelete = confirm(
-    `🗑️ Delete "${playlist.name}"?\n\nThis is a demonstration. Full delete functionality will be implemented in CIA-3.`
-  );
-
-  if (confirmDelete) {
-    // TEMPORARY delete: remove from local array only
-    this.playlists = this.playlists.filter(p => p.id !== playlist.id);
-
-    alert(
-      '✅ Playlist removed (temporarily)\n\nIn CIA-3, this will:\n• Remove from database\n• Update UI via service\n• Persist across refresh'
-    );
-
-    console.log('Temporarily deleted:', playlist.name);
-  } else {
-    console.log('Delete cancelled');
+    if (confirm(`Delete "${playlist.name}"?`)) {
+      this.playlistService.deletePlaylist(playlist.id);
+      this.snackBar.open(`🗑️ Playlist "${playlist.name}" deleted`, 'Undo', { duration: 4000 });
+    }
   }
-}
-
 
   playPlaylist(playlist: Playlist): void {
-    alert(`▶️ Play "${playlist.name}"\n\nPlayback functionality will be implemented in CIA-3 using:\n• AudioService (Task 4)\n• Media player controls\n• Queue management`);
-    console.log('Play playlist:', playlist.name);
+    const songs = this.getPlaylistSongs(playlist);
+    if (songs.length > 0) {
+      this.audioService.playAll(songs);
+      this.snackBar.open(`▶️ Playing "${playlist.name}"`, 'Dismiss', { duration: 2000 });
+    } else {
+      this.snackBar.open('This playlist is empty', 'Dismiss', { duration: 2000 });
+    }
+  }
+
+  removeSong(playlistId: number, songId: number): void {
+    this.playlistService.removeSongFromPlaylist(playlistId, songId);
+    this.snackBar.open('Song removed from playlist', 'Dismiss', { duration: 2000 });
+  }
+
+  getPlaylistSongs(playlist: Playlist): Song[] {
+    return playlist.songIds
+      .map(id => this.allSongs.find(s => s.id === id))
+      .filter((s): s is Song => s !== undefined);
+  }
+
+  getSongTitle(songId: number): string {
+    const song = this.allSongs.find(s => s.id === songId);
+    return song ? song.title : 'Unknown';
+  }
+
+  getArtistName(songId: number): string {
+    const song = this.allSongs.find(s => s.id === songId);
+    return song ? this.musicService.getArtistNameSync(song.artistId) : 'Unknown';
   }
 
   getPrivacyClass(privacy: string): string {

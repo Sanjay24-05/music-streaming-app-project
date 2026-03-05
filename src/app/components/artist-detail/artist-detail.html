@@ -1,5 +1,5 @@
-
-<div class="artist-detail-container" *ngIf="artist">
+@if (artist) {
+<div class="artist-detail-container">
   <!-- Artist Header -->
   <div class="artist-header">
     <img [src]="artist.imageUrl" [alt]="artist.name" class="artist-image">
@@ -10,12 +10,20 @@
         {{ artist.getFormattedListeners() }} monthly listeners
       </p>
       <mat-chip-set>
-        <mat-chip *ngFor="let genre of artist.genres">{{ genre }}</mat-chip>
+        @for (genre of artist.genres; track genre) {
+        <mat-chip>{{ genre }}</mat-chip>
+        }
       </mat-chip-set>
-      <button mat-raised-button color="primary" (click)="followArtist()">
-        <mat-icon>person_add</mat-icon>
-        Follow
-      </button>
+      <div class="artist-actions">
+        <button mat-raised-button color="primary" (click)="toggleFollow()">
+          <mat-icon>{{ isFollowing ? 'person_remove' : 'person_add' }}</mat-icon>
+          {{ isFollowing ? 'Following' : 'Follow' }}
+        </button>
+        <button mat-raised-button (click)="playAll()" [disabled]="topTracks.length === 0">
+          <mat-icon>play_arrow</mat-icon>
+          Play All
+        </button>
+      </div>
     </div>
   </div>
 
@@ -33,13 +41,14 @@
   <div class="top-tracks-section">
     <h2>Top Tracks</h2>
     <div class="tracks-list">
-      <mat-card *ngFor="let track of topTracks; let i = index" class="track-card">
+      @for (track of topTracks; track track.id; let i = $index) {
+      <mat-card class="track-card" [appHighlightPlaying]="track.id">
         <div class="track-content">
           <span class="track-number">{{ i + 1 }}</span>
           <img [src]="track.coverImageUrl" [alt]="track.title" class="track-cover">
           <div class="track-info">
             <h3>{{ track.title }}</h3>
-            <p>{{ track.getFormattedDuration() }} • {{ track.genre }}</p>
+            <p>{{ track.duration | duration }} • {{ track.genre }}</p>
           </div>
         </div>
         <div class="track-actions">
@@ -48,6 +57,15 @@
           </button>
         </div>
       </mat-card>
+      } @empty {
+      <p class="no-tracks">No tracks available</p>
+      }
     </div>
   </div>
 </div>
+} @else {
+<div class="loading-state">
+  <mat-icon class="loading-icon">person_search</mat-icon>
+  <p>Loading artist...</p>
+</div>
+}

@@ -1,54 +1,64 @@
 <div class="song-list-container">
   <h2 class="page-title">All Songs</h2>
-  
+
+  <!-- Search and Filter Bar -->
+  <div class="filter-bar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search songs or artists</mat-label>
+      <input matInput [(ngModel)]="searchQuery" placeholder="Search...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="genre-field">
+      <mat-label>Genre</mat-label>
+      <mat-select [(ngModel)]="selectedGenre">
+        @for (genre of genres; track genre) {
+        <mat-option [value]="genre">{{ genre }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <div class="songs-grid">
-    <mat-card *ngFor="let song of songs" class="song-card">
-      <img 
-        mat-card-image 
-        [src]="song.coverImageUrl" 
-        [alt]="song.title"
-        class="song-cover"
-      />
-      
+    @for (song of getFilteredSongs(); track song.id) {
+    <mat-card class="song-card" [appHighlightPlaying]="song.id">
+      <img mat-card-image [src]="song.coverImageUrl" [alt]="song.title" class="song-cover" appAlbumAnimate />
+
       <mat-card-header>
         <mat-card-title>{{ song.title }}</mat-card-title>
         <mat-card-subtitle>{{ getArtistName(song.artistId) }}</mat-card-subtitle>
       </mat-card-header>
-      
+
       <mat-card-content>
         <div class="song-info">
           <mat-chip-set>
-            <mat-chip>{{ song.genre }}</mat-chip>
+            <mat-chip>{{ song.genre | uppercase }}</mat-chip>
           </mat-chip-set>
-          <p class="duration">{{ song.getFormattedDuration() }}</p>
+          <p class="duration">{{ song.duration | duration }}</p>
         </div>
+        <p class="release-date">{{ song.releaseDate | date:'mediumDate' }}</p>
       </mat-card-content>
-      
+
       <mat-card-actions class="song-actions">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          (click)="playSong(song)"
-        >
+        <button mat-raised-button color="primary" (click)="playSong(song)">
           <mat-icon>play_arrow</mat-icon>
           Play
         </button>
-        
-        <button 
-          mat-icon-button 
-          (click)="toggleFavorite(song)"
-          [ngClass]="{'favorite-active': song.isFavorite}"
-        >
-          <mat-icon>{{ song.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+
+        <button mat-icon-button (click)="toggleFavorite(song)" [ngClass]="{'favorite-active': isFavorite(song.id)}">
+          <mat-icon>{{ isFavorite(song.id) ? 'favorite' : 'favorite_border' }}</mat-icon>
         </button>
-        
-        <button 
-          mat-icon-button 
-          (click)="addToPlaylist(song)"
-        >
+
+        <button mat-icon-button (click)="addToPlaylist(song)" matTooltip="Add to playlist">
           <mat-icon>playlist_add</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
+    } @empty {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">music_off</mat-icon>
+      <p>No songs found matching your criteria</p>
+    </div>
+    }
   </div>
 </div>

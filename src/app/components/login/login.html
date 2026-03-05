@@ -1,0 +1,49 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-icon class="login-icon">music_note</mat-icon>
+            <mat-card-title>Sign In</mat-card-title>
+            <mat-card-subtitle>Access your music library</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
+                <!-- Email -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" [(ngModel)]="email" name="email" required email #emailField="ngModel"
+                        placeholder="you@example.com">
+                    <mat-icon matSuffix>email</mat-icon>
+                    @if (emailField.errors?.['required'] && emailField.touched) {
+                    <mat-error>Email is required</mat-error>
+                    }
+                    @if (emailField.errors?.['email'] && emailField.touched) {
+                    <mat-error>Please enter a valid email</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password"
+                        required minlength="6" #passwordField="ngModel" placeholder="Enter password">
+                    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                    @if (passwordField.errors?.['required'] && passwordField.touched) {
+                    <mat-error>Password is required</mat-error>
+                    }
+                    @if (passwordField.errors?.['minlength'] && passwordField.touched) {
+                    <mat-error>Password must be at least 6 characters</mat-error>
+                    }
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit" class="login-button"
+                    [disabled]="loginForm.invalid">
+                    <mat-icon>login</mat-icon>
+                    Sign In
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

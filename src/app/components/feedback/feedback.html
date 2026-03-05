@@ -1,0 +1,56 @@
+<div class="feedback-container">
+    <mat-card class="feedback-card">
+        <mat-card-header>
+            <mat-icon class="feedback-icon">feedback</mat-icon>
+            <mat-card-title>Send Feedback</mat-card-title>
+            <mat-card-subtitle>We'd love to hear from you</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form #feedbackForm="ngForm" (ngSubmit)="onSubmit()" class="feedback-form">
+                <!-- Name -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Your Name</mat-label>
+                    <input matInput [(ngModel)]="name" name="name" required #nameField="ngModel" placeholder="John Doe">
+                    <mat-icon matSuffix>person</mat-icon>
+                    @if (nameField.errors?.['required'] && nameField.touched) {
+                    <mat-error>Name is required</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- Email -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" [(ngModel)]="email" name="email" required email #emailField="ngModel"
+                        placeholder="you@example.com">
+                    <mat-icon matSuffix>email</mat-icon>
+                    @if (emailField.errors?.['required'] && emailField.touched) {
+                    <mat-error>Email is required</mat-error>
+                    }
+                    @if (emailField.errors?.['email'] && emailField.touched) {
+                    <mat-error>Please enter a valid email</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- Message -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput [(ngModel)]="message" name="message" required minlength="10" rows="5"
+                        #messageField="ngModel" placeholder="Tell us what you think..."></textarea>
+                    @if (messageField.errors?.['required'] && messageField.touched) {
+                    <mat-error>Message is required</mat-error>
+                    }
+                    @if (messageField.errors?.['minlength'] && messageField.touched) {
+                    <mat-error>Message must be at least 10 characters</mat-error>
+                    }
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit" class="submit-button"
+                    [disabled]="feedbackForm.invalid">
+                    <mat-icon>send</mat-icon>
+                    Submit Feedback
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

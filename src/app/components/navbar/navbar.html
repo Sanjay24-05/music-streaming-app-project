@@ -1,13 +1,30 @@
-
-<mat-toolbar color="primary" class="navbar">
-  <span class="app-title">
+<mat-toolbar class="navbar">
+  <!-- Logo & Title -->
+  <a routerLink="/songs" class="app-title">
     <mat-icon>music_note</mat-icon>
     {{ appTitle }}
-  </span>
-  
+  </a>
+
   <span class="spacer"></span>
-  
-  <nav class="nav-links">
+
+  <!-- Mini Now Playing -->
+  @if (currentSong) {
+  <div class="mini-player">
+    <img [src]="currentSong.coverImageUrl" [alt]="currentSong.title" class="mini-cover">
+    <div class="mini-info">
+      <span class="mini-title">{{ currentSong.title }}</span>
+      <span class="mini-artist">{{ getArtistName(currentSong.artistId) }}</span>
+    </div>
+    <button mat-icon-button (click)="togglePlayPause()" class="mini-play-btn">
+      <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+    </button>
+  </div>
+  }
+
+  <span class="spacer"></span>
+
+  <!-- Desktop Nav Links -->
+  <nav class="nav-links desktop-nav">
     <a mat-button routerLink="/songs" routerLinkActive="active-link">
       <mat-icon>library_music</mat-icon>
       Songs
@@ -25,4 +42,55 @@
       Now Playing
     </a>
   </nav>
+
+  <!-- Theme Toggle -->
+  <button mat-icon-button (click)="toggleTheme()" class="theme-toggle">
+    <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <!-- More Menu (Login/Feedback) -->
+  <button mat-icon-button [matMenuTriggerFor]="moreMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #moreMenu="matMenu">
+    <a mat-menu-item routerLink="/login">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </a>
+    <a mat-menu-item routerLink="/feedback">
+      <mat-icon>feedback</mat-icon>
+      <span>Feedback</span>
+    </a>
+  </mat-menu>
+
+  <!-- Mobile Hamburger -->
+  <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item routerLink="/songs">
+      <mat-icon>library_music</mat-icon>
+      <span>Songs</span>
+    </a>
+    <a mat-menu-item routerLink="/artists">
+      <mat-icon>people</mat-icon>
+      <span>Artists</span>
+    </a>
+    <a mat-menu-item routerLink="/playlists">
+      <mat-icon>playlist_play</mat-icon>
+      <span>Playlists</span>
+    </a>
+    <a mat-menu-item routerLink="/now-playing">
+      <mat-icon>play_circle</mat-icon>
+      <span>Now Playing</span>
+    </a>
+    <a mat-menu-item routerLink="/login">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </a>
+    <a mat-menu-item routerLink="/feedback">
+      <mat-icon>feedback</mat-icon>
+      <span>Feedback</span>
+    </a>
+  </mat-menu>
 </mat-toolbar>

@@ -1,29 +1,26 @@
 <div class="player-container">
+  <!-- Main Player Card -->
   <mat-card class="player-card">
     <div class="player-content">
+      @if (currentSong) {
       <!-- Album Cover -->
       <div class="album-cover">
-        <img [src]="currentSong.coverImage" [alt]="currentSong.title">
+        <img [src]="currentSong.coverImageUrl" [alt]="currentSong.title" appAlbumAnimate [class.spinning]="isPlaying">
       </div>
 
       <!-- Song Info -->
       <div class="song-info">
         <h2>{{ currentSong.title }}</h2>
-        <p>{{ currentSong.artist }}</p>
+        <p>{{ getArtistName(currentSong.artistId) }}</p>
       </div>
 
       <!-- Progress Bar -->
       <div class="progress-section">
-        <span class="time">{{ formatTime(currentTime) }}</span>
-        <mat-slider 
-          class="progress-slider"
-          [min]="0"
-          [max]="duration"
-          [discrete]="true"
-        >
-          <input matSliderThumb [(ngModel)]="currentTime">
+        <span class="time">{{ currentTime | duration }}</span>
+        <mat-slider class="progress-slider" [min]="0" [max]="duration || 1" [step]="1">
+          <input matSliderThumb [ngModel]="currentTime" (ngModelChange)="onSeek($event)">
         </mat-slider>
-        <span class="time">{{ formatTime(duration) }}</span>
+        <span class="time">{{ duration | duration }}</span>
       </div>
 
       <!-- Playback Controls -->
@@ -31,16 +28,11 @@
         <button mat-icon-button (click)="skipPrevious()">
           <mat-icon>skip_previous</mat-icon>
         </button>
-        
-        <button 
-          mat-fab 
-          color="primary" 
-          (click)="togglePlayPause()"
-          class="play-button"
-        >
+
+        <button mat-fab color="primary" (click)="togglePlayPause()" class="play-button">
           <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
         </button>
-        
+
         <button mat-icon-button (click)="skipNext()">
           <mat-icon>skip_next</mat-icon>
         </button>
@@ -48,17 +40,48 @@
 
       <!-- Volume Control -->
       <div class="volume-section">
-        <mat-icon>volume_up</mat-icon>
-        <mat-slider 
-          class="volume-slider"
-          [min]="0"
-          [max]="100"
-          [discrete]="true"
-        >
-          <input matSliderThumb [(ngModel)]="volume">
+        <mat-icon>{{ getVolumeIcon() }}</mat-icon>
+        <mat-slider class="volume-slider" [min]="0" [max]="100" [step]="1">
+          <input matSliderThumb [ngModel]="volume" (ngModelChange)="onVolumeChange($event)">
         </mat-slider>
         <span class="volume-value">{{ volume }}%</span>
       </div>
+      } @else {
+      <!-- No Song Selected -->
+      <div class="no-song">
+        <mat-icon class="no-song-icon">music_note</mat-icon>
+        <h2>No Song Selected</h2>
+        <p>Select a song from the library to start playing</p>
+      </div>
+      }
     </div>
   </mat-card>
+
+  <!-- Queue Section -->
+  @if (queue.length > 0) {
+  <mat-card class="queue-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>queue_music</mat-icon>
+        Up Next
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        @for (song of queue; track song.id; let i = $index) {
+        <mat-list-item class="queue-item" (click)="playFromQueue(i)"
+          [class.active-queue-item]="currentSong?.id === song.id">
+          <span class="queue-number">{{ i + 1 }}</span>
+          <img [src]="song.coverImageUrl" [alt]="song.title" class="queue-cover">
+          <div class="queue-info">
+            <span class="queue-title">{{ song.title }}</span>
+            <span class="queue-artist">{{ getArtistName(song.artistId) }}</span>
+          </div>
+          <span class="queue-duration">{{ song.duration | duration }}</span>
+        </mat-list-item>
+        }
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  }
 </div>
