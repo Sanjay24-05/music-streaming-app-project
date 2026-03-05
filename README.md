@@ -226,20 +226,14 @@ Navigate to **`http://localhost:4200`** in your browser.
 
 ## 📸 Screenshots <a id="screenshots"></a>
 
-> [!NOTE]
-> Screenshots are being updated. Check back soon for the latest visual previews of CIA-3 features.
-
-### 🏠 Song Library
-<!-- Placeholder for Library Screenshot -->
-*[Library Screenshot Placeholder]*
-
-### 🎵 Now Playing
-<!-- Placeholder for Player Screenshot -->
-*[Player Screenshot Placeholder]*
-
-### 📋 Playlist Manager
-<!-- Placeholder for Playlist Screenshot -->
-*[Playlist Screenshot Placeholder]*
+<img width="1919" height="964" alt="Screenshot 2026-03-05 115501" src="https://github.com/user-attachments/assets/2eba1a75-142b-46c0-a188-fc6ba9b090c0" />
+<img width="1919" height="962" alt="Screenshot 2026-03-05 115603" src="https://github.com/user-attachments/assets/faf5619c-6127-411e-b13d-b6943aef1a16" />
+<img width="1915" height="954" alt="Screenshot 2026-03-05 115514" src="https://github.com/user-attachments/assets/d3b87285-ac8d-456e-a1c2-9adab0650e40" />
+<img width="1918" height="970" alt="Screenshot 2026-03-05 115529" src="https://github.com/user-attachments/assets/82e93935-e014-4435-9bd8-ffaa0cf4a494" />
+<img width="1919" height="962" alt="Screenshot 2026-03-05 115618" src="https://github.com/user-attachments/assets/f603d493-4d62-4672-99f7-73faff578710" />
+<img width="1919" height="967" alt="Screenshot 2026-03-05 115639" src="https://github.com/user-attachments/assets/535b440f-2607-4a04-bf34-65e17d6a783c" />
+<img width="1919" height="960" alt="Screenshot 2026-03-05 115657" src="https://github.com/user-attachments/assets/2957f0c8-40b9-4e68-ac5e-c55c43c7982a" />
+<img width="1919" height="973" alt="Screenshot 2026-03-05 115725" src="https://github.com/user-attachments/assets/006c117f-a1e8-4a04-b805-3457c2ca63f6" />
 
 ---
 
